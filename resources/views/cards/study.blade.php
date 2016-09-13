@@ -56,6 +56,7 @@
 						<br><br>
 
 						<form method="POST" action="/update/{{ $card->id }}">
+						{{ csrf_field() }} {{ method_field('PATCH') }}
 
 						<textarea name="Front" class="form-control lg">{{ $card->Front }}
 						</textarea>
