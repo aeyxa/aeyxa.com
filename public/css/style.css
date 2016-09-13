@@ -1,0 +1,73 @@
+.Title
+{
+	color:white;font-size:50px;font-family:"times new roman";margin:24px;
+}
+
+.subTitle
+{
+	color:white;font-size:12px;margin:26px;
+}
+
+.no
+{
+	color: inherit;
+}
+
+.panel-title
+{
+	font-size:30px;
+}
+
+.redBlock
+{
+	background-color:red;height:175px;
+}
+
+.blackBar
+{
+	background-color:black;height:20px;
+}
+
+.left
+{
+	text-align:left;
+}
+
+#options
+{
+	padding:4px;
+	margin-left: 1px;
+	margin-right: 1px;
+	width:250px;
+	background-color:white;
+	cursor:pointer;
+	font-style:italic;
+	color:#A4A4A4;
+}
+
+#options:hover
+{
+	color:black;
+	transition: all 0.8s;
+}
+
+#options:active
+{
+	color:black;
+	transition: all 0.8s;
+}
+
+#paginator
+{
+	margin-bottom:100px;font-size:20px;
+}
+
+[v-cloak]
+{
+	display:none;
+}
+
+.center
+{
+	text-align:center;
+}

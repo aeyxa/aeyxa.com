@@ -1,0 +1,27 @@
+[v-cloak]
+{
+    display: none;
+}
+
+.style
+{
+    font-size: 28px;
+    font-color: #000000;
+    font-weight: bold;
+}
+
+.left
+{
+    text-align: left;
+}
+
+.center
+{
+    text-align: center;
+}
+
+form
+{
+	display: inline;
+}
+
