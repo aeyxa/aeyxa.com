@@ -11,7 +11,11 @@ use App\Trash;
 use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateCardRequest;
+use App\Http\Requests\CreateUrlRequest;
+use App\Http\Requests\QuestionMarkRequest;
+use App\Http\Requests\CreateSetAndCardRequest;
+
+
 
 class CreateController extends Controller
 {
@@ -126,11 +130,12 @@ class CreateController extends Controller
 		$ip = $request->ip();
 
 		$card = new Card($request->input());
-		$set = new Set($request->input());
+		$set = new Set();
+
 
 		$card->ip = $ip;
 		$set->ip = $ip;
-
+		$set->Title = $request->Set;
 		$card->save();
 		$set->save();
 

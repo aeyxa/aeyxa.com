@@ -23,5 +23,4 @@ Route::get('/cards/{set}/study', 'PagesController@study');
 Route::get('/cards/create', 'PagesController@creation');
 Route::post('/create/card','CreateController@create');
 
-Route::get('/home', 'HomeController@index');
 Route::auth();
