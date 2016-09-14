@@ -15,8 +15,6 @@ use App\Http\Requests\CreateUrlRequest;
 use App\Http\Requests\QuestionMarkRequest;
 use App\Http\Requests\CreateSetAndCardRequest;
 
-
-
 class CreateController extends Controller
 {
 
@@ -70,8 +68,8 @@ class CreateController extends Controller
 			return redirect('/crawl')
 			->with('flash-message','<h4>Oops!</h4>
 			<p style="color:red;font-size:12px;">
-			It appears nothing has been created, if you continue 
-			to receive this error 
+			It appears nothing has been created, if you continue
+			to receive this error
 			<a href="/about/aeyxabot" target="_blank">
 			please read panel 7.
 			</a></p>');
@@ -99,7 +97,7 @@ class CreateController extends Controller
     {
 		// Update Card
 		$card = Card::find($id);
-        
+
 		$card->Front = $request->Front;
 
         $card->save();

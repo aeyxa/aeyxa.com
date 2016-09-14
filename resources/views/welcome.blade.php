@@ -105,16 +105,14 @@
         <div id="aeyxa-stealth-md-lg" class="well visible-lg visible-md">
             <span>
                 We support full guest authentication, meaning you'll
-                never have to register an account to use any of our services, we're
-                here to make your life a little easier!
+                never have to register an account to use any of our services!
             </span>
         </div>
 
         <div id="aeyxa-stealth-sm-xs" class="well visible-sm visible-xs">
             <span>
                 We support full guest authentication, meaning you'll
-                never have to register an account to use any of our services, we're
-                here to make your life a little easier!
+                never have to register an account to use any of our services!
             </span>
         </div>
     </div>
