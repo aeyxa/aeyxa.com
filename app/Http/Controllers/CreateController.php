@@ -68,7 +68,13 @@ class CreateController extends Controller
 		else
 		{
 			return redirect('/crawl')
-			->with('flash-message','<h4>Oops!</h4><p style="color:red;font-size:12px;">It appears nothing has been created, if you continue to receive this error <a href="/about/aeyxabot" target="_blank">please read panel 7.</a></p>');
+			->with('flash-message','<h4>Oops!</h4>
+			<p style="color:red;font-size:12px;">
+			It appears nothing has been created, if you continue 
+			to receive this error 
+			<a href="/about/aeyxabot" target="_blank">
+			please read panel 7.
+			</a></p>');
 		}
 		// Here we're getting the actual note cards that we display
 		$cards = Card::orderBy('created_at', 'desc')
