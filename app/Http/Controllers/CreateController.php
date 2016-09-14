@@ -46,15 +46,30 @@ class CreateController extends Controller
 			->orderBy('created_at', 'desc')->first();
 
 		// If Card was created after Trash, use Card, otherwise, use Trash.
-		if($last_T->created_at->lt($last_C->created_at))
+		if($last_T != "" && $last_C != "")
 		{
-			$last = $last_C->Set;
+			if($last_T->created_at->lt($last_C->created_at))
+			{
+				 $last = $last_C->Set;
+			}
+			else
+			{
+				$last = $last_T->Set;
+			}
+		}
+		elseif($last_T == "" && $last_C != "")
+		{
+			$last = $last_C;
+		}
+		elseif($last_C == "" && $last_T != "")
+		{
+			$last = $last_T;
 		}
 		else
 		{
-			$last = $last_T->Set;
+			return redirect('/crawl')
+			->with('flash-message','<h4>Oops!</h4><p style="color:red;font-size:12px;">It appears nothing has been created, if you continue to receive this error <a href="/about/aeyxabot" target="_blank">please read panel 7.</a></p>');
 		}
-
 		// Here we're getting the actual note cards that we display
 		$cards = Card::orderBy('created_at', 'desc')
 			->whereSet($last)->simplePaginate(1);
@@ -74,16 +89,18 @@ class CreateController extends Controller
 		return view('wiki.display', compact('cards','trash','count', 'set'));
 	}
 
-    public function update(QuestionMarkRequest $request, Card $id)
+    public function update(QuestionMarkRequest $request, $id)
     {
 		// Update Card
-		$id = $id->id;
 		$card = Card::find($id);
-        $card->Front = $request->Front;
-        $card->update(['Front' => $card->Front]);
+        
+		$card->Front = $request->Front;
+
+        $card->save();
 
 		// Push to Python
 		$regex = new Regex;
+
 		$regex->Sentence = $card->Back;
 		$regex->Match = $card->Front;
 		$regex->Priority = 0;
@@ -96,15 +113,25 @@ class CreateController extends Controller
 	public function learn(QuestionMarkRequest $request, $id)
     {
 		// Find Trash ID then push to python
-		$trash = Trash::whereId($id)->first();
+		$trash = Trash::find($id);
 
-		$regex = new Regex;
+		$regex = new Regex();
 
 		$regex->Sentence = $trash->Sentence;
 		$regex->Match = $request->Front;
 		$regex->Priority = 0;
 
 		$regex->save();
+
+		$card = new Card();
+
+		$card->Front = $request->Front;
+		$card->Back = $trash->Sentence;
+		$card->Set = $trash->Set;
+		$card->ip = $trash->ip;
+		$card->Priority = 0;
+
+		$card->save();
 
 		$trash->delete();
 

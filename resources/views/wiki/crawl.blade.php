@@ -10,6 +10,8 @@
 
         <div class="col-md-6 center"><br><br><br>
 
+		{!! Session::get('flash-message') !!}
+
 		@if(count($errors) > 0)<p class="center">Try using the 'Random' button below!</p>@endif
 
 		<form method="POST" action="/crawl/wikipedia">{{ csrf_field() }}

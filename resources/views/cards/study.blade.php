@@ -58,8 +58,8 @@
 						<form method="POST" action="/update/{{ $card->id }}">
 						{{ csrf_field() }} {{ method_field('PATCH') }}
 
-						<textarea name="Front" class="form-control lg">{{ $card->Front }}
-						</textarea>
+						<textarea name="Front" class="form-control lg"
+						>{{ $card->Front }}</textarea>
 
 						<br>
 
@@ -79,10 +79,10 @@
 								<strong>permanently destroy</strong>.
 							</span>
 						</p><br>
-                        <a href="/delete/{{ $card->id }}">
+						<a href="/delete/{{ $card->id }}">
 						    <button type="submit" class="btn btn-danger"
 						    style="width:140px">Delete</button>
-                        </a>
+						</a>	
 						<br><br>
 					</div>
 

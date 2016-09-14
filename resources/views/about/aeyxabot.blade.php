@@ -281,17 +281,52 @@
 			</div>
 
 
-			<!-- Panel #7 -->
+			<!-- Panel 7 -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
 						<a data-toggle="collapse" href="#box7">
-							How exactly does aeyxabot work?
+							Why am I getting a repeat error message?
 						</a>
 					</h4>
 				</div>
 
 				<div id="box7" class="panel-collapse collapse">
+					<div class="panel-body">
+						<h5>
+							No cards have been created yet and the searches 
+							you are making are not producing results.
+						</h5>
+
+						<br>
+
+						<p class="left">
+							I've seen this happen a few times after deleting 
+							all cards from the database. A lot of times the 
+							first few will fail out. Similar to why you will 
+							get the last set displayed when doing a random 
+							search. If there's no cards to display however 
+							then it simply errors out. If you're using the 
+							random button when reviewing these error messages 
+							then I recommend finding a Wikipedia page with 
+							lots of content to be your first search.
+						</p>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Panel #8 -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>
+						<a data-toggle="collapse" href="#box8">
+							How exactly does aeyxabot work?
+						</a>
+					</h4>
+				</div>
+
+				<div id="box8" class="panel-collapse collapse">
 					<div class="panel-body">
 
 						<h5>
@@ -336,17 +371,17 @@
 			</div>
 
 
-			<!-- Panel #8 -->
+			<!-- Panel #9 -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4>
-						<a data-toggle="collapse" href="#box8">
+						<a data-toggle="collapse" href="#box9">
 							Where can I view the code for aexyabot?
 						</a>
 					</h4>
 				</div>
 
-				<div id="box8" class="panel-collapse collapse">
+				<div id="box9" class="panel-collapse collapse">
 					<div class="panel-body">
 
 						<h5>
