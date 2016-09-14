@@ -49,7 +49,7 @@
 				<div class="modal-body">
 					@if(count($cards) > 0)
 					<div v-if="update">
-						<a href="/about/aeyxa">
+						<a href="/about/aeyxabot">
 							Help make aeyxabot smarter!
 						</a>
 
@@ -82,7 +82,7 @@
 						<a href="/delete/{{ $card->id }}">
 						    <button type="submit" class="btn btn-danger"
 						    style="width:140px">Delete</button>
-						</a>	
+						</a>
 						<br><br>
 					</div>
 

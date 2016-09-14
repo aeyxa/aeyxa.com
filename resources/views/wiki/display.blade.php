@@ -58,7 +58,7 @@
 				<div class="modal-body">
 					@if(count($cards) > 0)
 					<div v-if="update">
-						<a href="/about/aeyxa">
+						<a href="/about/aeyxabot">
 							Help make aeyxabot smarter!
 						</a>
 
