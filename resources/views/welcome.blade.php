@@ -94,9 +94,11 @@
                         <div class="margin-bot-20">Learn more below!</div>
                     </div>
                     <div class="aeyxa-box-red-bot">
-                        <button class="aeyxa-btn btn-b-w ayx-lg">
-                            Explore
-                        </button>
+                        <a href="https://github.com/aeyxa/aeyxachat">
+                            <button class="aeyxa-btn btn-b-w ayx-lg">
+                                Explore
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -115,6 +117,8 @@
                 never have to register an account to use any of our services!
             </span>
         </div>
+        
     </div>
+    
 </div>
 @endsection
