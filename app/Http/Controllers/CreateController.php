@@ -160,15 +160,21 @@ class CreateController extends Controller
 	{
 		$ip = $request->ip();
 
+		$set = Set::whereTitle($request->Set)->first();
+
+		if(!$set)
+		{
+			$set = new Set();
+			$set->ip = $ip;
+			$set->Title = $request->Set;
+
+			$set->save();
+		}
+
 		$card = new Card($request->input());
-		$set = new Set();
-
-
 		$card->ip = $ip;
-		$set->ip = $ip;
-		$set->Title = $request->Set;
+
 		$card->save();
-		$set->save();
 
 		return back();
 	}
