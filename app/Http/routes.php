@@ -21,6 +21,7 @@ Route::get('/about/aeyxabot', 'PagesController@aeyxabot');
 Route::get('/cards/select', 'PagesController@select');
 Route::get('/cards/{set}/study', 'PagesController@study');
 Route::get('/cards/create', 'PagesController@creation');
-Route::post('/create/card','CreateController@create');
+Route::post('/cards/create','CreateController@create');
+Route::get('/cards/shuffle/{set}','PagesController@shuffle');
 
 Route::auth();

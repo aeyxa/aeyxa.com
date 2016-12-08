@@ -160,7 +160,7 @@ class CreateController extends Controller
 	{
 		$ip = $request->ip();
 
-		$set = Set::whereTitle($request->Set)->first();
+		$set = Set::whereIp($ip)->whereTitle($request->Set)->first();
 
 		if(!$set)
 		{
@@ -176,7 +176,7 @@ class CreateController extends Controller
 
 		$card->save();
 
-		return back();
+		return view('cards.create',compact('set'));
 	}
 
 	public function delete(Request $request, $id)

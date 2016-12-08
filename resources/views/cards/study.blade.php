@@ -10,31 +10,32 @@
     <div class="col-md-6 col-md-offset-3">
 
     @foreach ($cards as $card)
-    <div class="row" style="margin-bottom:50px;margin-top:30px;">
-        <p><strong>{{ $card->Set }}</strong></p>
+        <div class="row" style="margin-bottom:50px;margin-top:30px;">
+            <p><strong>{{ $card->Set }}</strong></p>
 
-        {{-- For desktops, no transition effect --}}
-        <div class="visible-lg visible-md">
-            <button type="button" class="card" @click="Flip">
-                <span v-if="flip">{{ $card->Front }}</span>
-                <span v-if="!flip">{{ $card->Back }}</span>
-            </button>
+            {{-- For desktops, no transition effect --}}
+            <div class="visible-lg visible-md">
+                <button type="button" class="card" @click="Flip">
+                    <span v-if="flip">{{ $card->Front }}</span>
+                    <span v-if="!flip">{{ $card->Back }}</span>
+                </button>
+            </div>
+
+            {{-- For mobile, slow transition effect --}}
+            <div class="visible-sm visible-xs">
+                <button type="button" class="card effect" @click="Flip">
+                    <span v-if="flip">{{ $card->Front }}</span>
+                    <span v-if="!flip">{{ $card->Back }}</span>
+                </button>
+            </div>
+
         </div>
-
-        {{-- For mobile, slow transition effect --}}
-        <div class="visible-sm visible-xs">
-            <button type="button" class="card effect" @click="Flip">
-                <span v-if="flip">{{ $card->Front }}</span>
-                <span v-if="!flip">{{ $card->Back }}</span>
-            </button>
-        </div>
-
-    </div>
     @endforeach
 
     <div id="paginator">{{ $cards->links() }}</div>
 
-    <button id="options" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+    <button id="options" class="btn btn-default" data-toggle="modal"
+    data-target="#myModal">
 		Click here for more options.
 	</button>
 
@@ -137,6 +138,13 @@
 				</div>
 
 				<div class="modal-footer">
+                    @foreach($cards as $card)
+                    <form method="GET" action="/cards/shuffle/{{ $card->Set }}">
+                        <button type="submit" class="btn btn-default"
+                        style="font-size:20px;">
+                            <i class="fa fa-random" aria-hidden="true"></i>
+                        </button>
+                    @endforeach
 					<button type="button" class="btn btn-default"
 					@click="Update" style="font-size:20px;">
 						<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -159,6 +167,7 @@
 							&times;
 						</span>
 					</button>
+                    </form>
 				</div>
 
 			</div>

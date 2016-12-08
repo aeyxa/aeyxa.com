@@ -11,16 +11,22 @@
 
             <br>
 
-            <form method="POST" action="/create/card">{{ csrf_field() }}
+            <form method="POST" action="/cards/create">{{ csrf_field() }}
                 <span class="left">Set</span>
-                <input name="Set" class="form-control"
-                placeholder="Set for card">
+
+                @if($set != "")
+                    <input name="Set" class="form-control"
+                    placeholder="Set for card" value="{{ $set->Title }}">
+                @else
+                    <input name="Set" class="form-control"
+                    placeholder="Set for card">
+                @endif
 
                 <br>
 
                 <span class="left">Front</span>
                 <input name="Front" class="form-control"
-                placeholder="Front of card">
+                placeholder="Front of card" autofocus>
 
                 <br>
 
@@ -30,8 +36,8 @@
 
                 <br>
 
-                <span class="left">Priority</span>
-                <input name="Priority" class="form-control" value="0">
+                <input type="hidden" name="Priority" class="form-control"
+                value="0">
 
                 <br>
 
