@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Auth;
 use App\Set;
 use App\Urls;
 use App\Card;
@@ -11,6 +12,7 @@ use App\Trash;
 use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 use App\Http\Requests\CreateUrlRequest;
 use App\Http\Requests\QuestionMarkRequest;
 use App\Http\Requests\CreateSetAndCardRequest;
@@ -156,23 +158,42 @@ class CreateController extends Controller
 		return redirect('/delay');
 	}
 
-	public function create(CreateSetAndCardRequest $request)
+	public function create(Guard $auth, CreateSetAndCardRequest $request)
 	{
-		$ip = $request->ip();
+        $card = new Card($request->input());
 
-		$set = Set::whereIp($ip)->whereTitle($request->Set)->first();
+        $ip = $request->ip();
+
+        if(Auth::check())
+        {
+            $user = $auth->user()->email;
+
+            $set = Set::whereUser($user)->whereTitle($request->Set)->first();
+
+            $card->user = $user;
+        }
+        else
+        {
+            $set = Set::whereIp($ip)->whereTitle($request->Set)->first();
+        }
+
+        $card->ip = $ip;
 
 		if(!$set)
 		{
 			$set = new Set();
+
 			$set->ip = $ip;
+
+            if(Auth::check())
+            {
+                $set->user = $user;
+            }
+
 			$set->Title = $request->Set;
 
 			$set->save();
 		}
-
-		$card = new Card($request->input());
-		$card->ip = $ip;
 
 		$card->save();
 
@@ -181,17 +202,44 @@ class CreateController extends Controller
 
 	public function delete(Request $request, $id)
 	{
-		$ip = $request->ip();
 
-		$card = Card::whereIp($ip)->whereId($id)->first();
+        $card = Card::author()->whereId($id)->first();
+
+        if(Auth::check())
+        {
+            $user = $auth->user()->email;
+
+            $card = Card::whereUser($user)->whereId($id)->first();
+        }
+        else
+        {
+            $ip = $request->ip();
+
+            $card = Card::whereIp($ip)->whereId($id)->first();
+        }
 
 		$card->delete();
 
-		$count_cards = Card::whereIp($ip)->whereSet($card->Set)->get();
+        if(Auth::check())
+        {
+            $count_cards = Card::whereUser($user)->whereSet($card->Set)->get();
+        }
+        else
+        {
+            $count_cards = Card::whereIp($ip)->whereSet($card->Set)->get();
+        }
 
 		if(count($count_cards) == 0)
 		{
-			Set::whereIp($ip)->whereTitle($card->Set)->delete();
+            if(Auth::check())
+            {
+
+            }
+            else
+            {
+                Set::whereIp($ip)->whereTitle($card->Set)->delete();
+            }
+
 
 			return redirect('/cards/select');
 		}
@@ -199,6 +247,5 @@ class CreateController extends Controller
 		{
 			return back();
 		}
-
 	}
 }

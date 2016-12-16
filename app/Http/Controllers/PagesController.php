@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Auth;
 use App\Set;
 use App\Card;
+use App\User;
 use App\Trash;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Auth\Guard;
 
 class PagesController extends Controller
 {
@@ -33,24 +35,32 @@ class PagesController extends Controller
         return view('cards.create',compact('set'));
     }
 
-    public function select(Request $request)
+    public function select(Guard $auth, Request $request)
     {
         $ip = $request->ip();
 
-        $sets = Set::orderBy('created_at', 'desc')
-            ->whereIp($ip)->get();
-        $cards = Card::orderBy('created_at', 'desc')
-            ->whereIp($ip)->get();
+        $cards = Card::author()->orderBy('created_at', 'desc')->get();
+        $sets = Set::author()->orderBy('created_at', 'desc')->get();
 
         return view('cards.select',compact('ip','sets','cards'));
     }
 
-    public function study(Request $request, $set)
+    public function study(Guard $auth, Request $request, $set)
     {
-        $ip = $request->ip();
+        if(Auth::check())
+        {
+            $user = $auth->user()->email;
 
-        $cards = Card::orderBy('Priority')
-            ->whereIp($ip)->whereSet($set)->simplePaginate(1);
+            $cards = Card::orderBy('Priority')
+                ->whereUser($user)->whereSet($set)->simplePaginate(1);
+        }
+        else
+        {
+            $ip = $request->ip();
+
+            $cards = Card::orderBy('Priority')
+                ->whereIp($ip)->whereSet($set)->simplePaginate(1);
+        }
 
         $count_cards = Card::orderBy('created_at', 'desc')
             ->whereSet($set)->get();
@@ -62,8 +72,14 @@ class PagesController extends Controller
 
         if(count($count_cards) == 0)
         {
-            Set::whereIp($ip)->whereTitle($set)->delete();
-
+            if(Auth::check())
+            {
+                Set::whereUser($user)->whereTitle($set)->delete();
+            }
+            else
+            {
+                Set::whereIp($ip)->whereTitle($set)->delete();
+            }
             return back();
         }
         else
@@ -77,7 +93,7 @@ class PagesController extends Controller
         return view('wiki.delay');
     }
 
-    public function shuffle(Request $request, $set)
+    public function shuffle(Guard $auth, Request $request, $set)
     {
         $ip = $request->ip();
 
