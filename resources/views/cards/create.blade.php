@@ -25,14 +25,14 @@
                 <br>
 
                 <span class="left">Front</span>
-                <input name="Front" class="form-control"
-                placeholder="Front of card" autofocus>
+                <textarea name="Front" class="form-control"
+                placeholder="Front of card" autofocus></textarea>
 
                 <br>
 
                 <span class="left">Back</span>
-                <input name="Back" class="form-control"
-                placeholder="Back of card">
+                <textarea name="Back" class="form-control"
+                placeholder="Back of card"></textarea>
 
                 <br>
 
