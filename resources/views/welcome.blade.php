@@ -1,124 +1,190 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="/css/pageStyle.css">
+    <title>Aeyxa</title>
 
-@section('content')
-<div id="container" class="text-center">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Khula"
+    rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- Styles -->
+    <style>
+        html, body
+        {
+            background-color: #FFF;
+            color: #1C1C1C;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Khula', sans-serif;
+        }
+        .full-height
+        {
+            height: 100vh;
+        }
+        .flex-center
+        {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        .position-ref
+        {
+            position: relative;
+        }
+        .content
+        {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            font-weight: bold;
+        }
+        .aeyxa-lg
+        {
+            font-size: 102px;
+            font-weight: bold;
+            letter-spacing: 4rem;
+            margin-right: -4rem;
+            color: #FFF;
+            font-family: 'PT Sans Caption', sans-serif;
+        }
+        .aeyxa-xs
+        {
+            font-size: 51px;
+            font-weight: bold;
+            letter-spacing: 1rem;
+            margin-right: -1rem;
+            color: #FFF;
+            font-family: 'PT Sans Caption', sans-serif;
+        }
+        a
+        {
+            color: #FFF;
+            padding: 0 25px;
+            font-size: 12px;
+            text-decoration: none;
+            letter-spacing: .1rem;
+            text-transform: uppercase;
+        }
+        a:hover
+        {
+            color: #CCC;
+            padding: 0 25px;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+        .links
+        {
+            margin-right: 10px;
+        }
+        .info-box
+        {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 15px;
+            font-size: 12px;
+            color: #FFF;
+            display: inline;
+            width: 50%;
+            float: left;
+        }
+    </style>
 
-    <div id=aeyxa-red-bar style="margin-bottom:50px;">
-        <h1 class="aeyxa">aeyxa</h1>
+</head>
+
+<body>
+    <div id="app">
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                <div id="front-page">
+                    <span id="aeyxa-lg" class="aeyxa-lg hidden-xs">
+                        AEYXA
+                    </span>
+                    <span id="aeyxa-xs" class="aeyxa-xs visible-xs">
+                        AEYXA
+                    </span>
+
+                    <div id="links" class="links">
+
+                        <div class="info-box">
+                            <a href="https://github.com/aeyxa" target="_blank">
+                                <span id="github">
+                                    github
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="info-box">
+                            <a href="/cards/select" target="_blank">
+                                <span id="notecards">
+                                    note cards
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        function sleep(ms)
+        {
+            return new Promise(resolve => setTimeout(resolve,ms));
+        }
 
+        function changeColor(id)
+        {
+            document.getElementById(id).style.color = "#CCC";
+        }
 
-    <div class="col-md-8 col-md-offset-2">
+        function applyShadow(shadow)
+        {
+            lg = "2px -2px 10px ";
+            xs = "2px -2px 7px ";
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="aeyxa-box aeyxa-box-red">
-                    <div class="aeyxa-box-red-top">
-                        <span>Note Cards</span>
-                    </div>
-                    <div class="aeyxa-box-wht-mid">
-                        <span>
-                            <strong>Create and study your note cards!</strong>
-                        </span>
+            document.getElementById("aeyxa-lg").style.textShadow = lg + shadow;
+            document.getElementById("aeyxa-xs").style.textShadow = xs + shadow;
+        }
 
-                        <p class="left font-16 aeyxa-box-body">
-                            Simple, easy to use note cards, designed for ease of
-                            availability, using a mobile friendly design to let
-                            you study anywhere! Currently supports private sets
-                            to group your note cards together for easy studying.
-                        </p>
+        async function loadPage()
+        {
+            codes =
+            [
+                "#FFF", "#EFF", "#EEF", "#DEE", "#DDE", "#CDD", "#CCD",
+                "#BCC", "#BBC", "#ABB", "#AAB", "#9AA", "#99AAAA"
+            ];
 
-                        <span>Learn more below!</span>
-                    </div>
-                    <div class="aeyxa-box-red-bot">
-                        <a href="/cards/select">
-                            <button class="aeyxa-btn btn-b-w ayx-lg">
-                                Explore
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            links = [ "github", "notecards" ];
 
-            <div class="col-md-4">
-                <div class="aeyxa-box aeyxa-box-red">
-                    <div class="aeyxa-box-red-top">
-                        <span>Wikipedia</span>
-                    </div>
-                    <div class="aeyxa-box-wht-mid">
-                        <span>
-                            <strong>Let us create your note cards!</strong>
-                        </span>
+            z = [ codes, links ];
 
-                        <p class="left font-16 aeyxa-box-body">
-                            We can create note cards automatically for you from
-                            Wikipedia pages with aeyxabot, our own custom data
-                            parsing engine, which uses a self learning algorithm
-                            to allow for accuracy growth every day!
-                        </p>
+            for(i = 0; i < z.length; ++i)
+            {
+                for(j = 0; j < z[i].length; ++j)
+                {
+                    x = 1000 / z[i].length;
 
-                        <span>Learn more below!</span>
-                    </div>
-                    <div class="aeyxa-box-red-bot">
-                        <a href="/crawl">
-                            <button class="aeyxa-btn btn-b-w ayx-lg">
-                                Explore
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    if(i)
+                    {
+                        await sleep(x).then(() => changeColor(z[i][j]));
+                    }
+                    else
+                    {
+                        await sleep(x).then(() => applyShadow(codes[j]));
+                    }
+                }
+            }
+        }
 
-            <div class="col-md-4">
-                <div class="aeyxa-box aeyxa-box-red">
+        window.onload = sleep(500).then(() => loadPage());
+    </script>
+</body>
 
-                    <div class="aeyxa-box-red-top">
-                        <span>Secure Chat</span>
-                    </div>
-                    <div class="aeyxa-box-wht-mid">
-                        <span>
-                            <strong>Keep your words private!</strong>
-                        <span>
-
-                        <p class="left font-16 aeyxa-box-body">
-                            Although this feature has
-                            <strong>not yet been implemented</strong>,
-                            we're planning to release a chat software designed
-                            for security and privacy. We hope to provide you
-                            with a simple to use point to point encryption chat!
-                        </p>
-
-                        <div class="margin-bot-20">Learn more below!</div>
-                    </div>
-                    <div class="aeyxa-box-red-bot">
-                        <a href="https://github.com/aeyxa/aeyxachat">
-                            <button class="aeyxa-btn btn-b-w ayx-lg">
-                                Explore
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div id="aeyxa-stealth-md-lg" class="well visible-lg visible-md">
-            <span>
-                We support full guest authentication, meaning you'll
-                never have to register an account to use any of our services!
-            </span>
-        </div>
-
-        <div id="aeyxa-stealth-sm-xs" class="well visible-sm visible-xs">
-            <span>
-                We support full guest authentication, meaning you'll
-                never have to register an account to use any of our services!
-            </span>
-        </div>
-        
-    </div>
-    
-</div>
-@endsection
+</html>
