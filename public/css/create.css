@@ -1,0 +1,50 @@
+.create-box, .create-box-xs
+{
+    background-color: #FFF;
+    border: 2px solid #DDD;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2), 0 2px 10px 0 rgba(0,0,0,0.19);
+    padding: 50px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+.create-box_title, .create-box_title-xs
+{
+    font-size: 40px;
+    color: #CCC;
+    text-align: center;
+}
+.create-box_input
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.wikipedia-box, .wikipedia-box-xs
+{
+    border: 1px solid #DDD;
+    border-radius: 2px;
+    color: #CCC;
+    padding: 10px;
+    margin-top: 10%;
+    font-style: italic;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+}
+.create-box-xs
+{
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 0px;
+}
+.create-box_title-xs
+{
+    font-size: 22px;
+}
+.wikipedia-box-xs
+{
+    padding: 7.5px;
+}

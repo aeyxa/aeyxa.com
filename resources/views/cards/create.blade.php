@@ -1,57 +1,115 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="/css/pageStyle.css">
+<link href="/css/create.css" rel="stylesheet">
 
 @section('content')
 <div id="container">
 
-    <div class="col-md-4 col-md-offset-4">
-        <div class="well form-group">
-            <h2 class="center">Note Card Creation</h2>
+    <div class="col-md-6 col-md-offset-3 hidden-xs">
+        <div class="create-box">
+            <div class="create-box_title">
+                <span>Note Card Creation</span>
+            </div>
 
-            <br>
+            <hr>
 
             <form method="POST" action="/cards/create">{{ csrf_field() }}
-                <span class="left">Set</span>
 
-                @if($set != "")
-                    <input name="Set" class="form-control"
-                    placeholder="Set for card" value="{{ $set->Title }}">
-                @else
-                    <input name="Set" class="form-control"
-                    placeholder="Set for card">
-                @endif
+                <div class="create-box_input">
+                    @if($set != "")
+                        <input name="Set" class="form-control"
+                        placeholder="Set" value="{{ $set->Title }}">
+                    @else
+                        <input name="Set" class="form-control"
+                        placeholder="Set">
+                    @endif
+                </div>
 
-                <br>
+                <div class="create-box_input">
+                    <textarea name="Front" class="form-control"
+                    placeholder="Front" autofocus></textarea>
+                </div>
 
-                <span class="left">Front</span>
-                <textarea name="Front" class="form-control"
-                placeholder="Front of card" autofocus></textarea>
+                <div class="create-box_input">
+                    <textarea name="Back" class="form-control"
+                    placeholder="Back of card"></textarea>
+                </div>
 
-                <br>
+                <div class="create-box_input">
+                    <input type="hidden" name="Priority" class="form-control"
+                    value="0">
+                </div>
 
-                <span class="left">Back</span>
-                <textarea name="Back" class="form-control"
-                placeholder="Back of card"></textarea>
+                <div class="create-box_input">
+                    <button type="reset" class="btn btn-default pull-left">
+                        Clear
+                    </button>
 
-                <br>
-
-                <input type="hidden" name="Priority" class="form-control"
-                value="0">
-
-                <br>
-
-                <button type="reset" class="btn btn-default pull-left">
-                    Clear
-                </button>
-
-                <button type="submit" class="btn btn-primary pull-right">
-                    Submit
-                </button>
-
-                <br>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        Submit
+                    </button>
+                </div>
             </form>
         </div>
+        <a href="/crawl">
+            <div class="wikipedia-box">
+                Create note cards automatically from Wikipedia
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 visible-xs">
+        <div class="create-box-xs">
+            <div class="create-box_title-xs">
+                <span>Note Card Creation</span>
+            </div>
+
+            <hr>
+
+            <form method="POST" action="/cards/create">{{ csrf_field() }}
+
+                <div class="create-box_input">
+                    @if($set != "")
+                        <input name="Set" class="form-control"
+                        placeholder="Set" value="{{ $set->Title }}">
+                    @else
+                        <input name="Set" class="form-control"
+                        placeholder="Set">
+                    @endif
+                </div>
+
+                <div class="create-box_input">
+                    <textarea name="Front" class="form-control"
+                    placeholder="Front" autofocus></textarea>
+                </div>
+
+                <div class="create-box_input">
+                    <textarea name="Back" class="form-control"
+                    placeholder="Back of card"></textarea>
+                </div>
+
+                <div class="create-box_input">
+                    <input type="hidden" name="Priority" class="form-control"
+                    value="0">
+                </div>
+
+                <div class="create-box_input">
+                    <button type="reset" class="btn btn-default pull-left">
+                        Clear
+                    </button>
+
+                    <button type="submit" class="btn btn-primary pull-right">
+                        Submit
+                    </button>
+                    <div style="clear: both;"></div>
+                </div>
+            </form>
+        </div>
+        <a href="/crawl">
+            <div class="wikipedia-box-xs">
+                Create note cards automatically from Wikipedia
+            </div>
+        </a>
     </div>
 
 </div>
